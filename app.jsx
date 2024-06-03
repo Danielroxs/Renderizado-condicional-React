@@ -22,7 +22,7 @@ export default function PackingList() {
 
 // Renderizado de Listas
 
-import { people } from "./data.js";
+/* import { people } from "./data.js";
 import { getImageUrl } from "./utils.js";
 
 export default function List() {
@@ -60,5 +60,25 @@ export default function List() {
         ))}
       </ul>
     </article>
+  );
+} */
+
+import { recipes } from "./data.js";
+
+export default function RecipeList() {
+  return (
+    <div>
+      <h1>Recetas</h1>
+      {recipes.map((recipe) => (
+        <div key={recipe.id}>
+          <h2>{recipe.name}</h2>
+          <ul>
+            {recipe.ingredients.map((ingredient) => (
+              <li key={ingredient}>{ingredient}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
   );
 }
