@@ -63,7 +63,7 @@ export default function List() {
   );
 } */
 
-import { recipes } from "./data.js";
+/* import { recipes } from "./data.js";
 
 export default function RecipeList() {
   return (
@@ -79,6 +79,35 @@ export default function RecipeList() {
           </ul>
         </div>
       ))}
+    </div>
+  );
+} */
+
+function Button({ onClick, children }) {
+  return (
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick();
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
+export default function Toolbar() {
+  return (
+    <div
+      className="Toolbar"
+      onClick={() => {
+        alert("¡Hiciste clic en la barra de herramientas!");
+      }}
+    >
+      <Button onClick={() => alert("¡Reproduciendo!")}>
+        Reproducir película
+      </Button>
+      <Button onClick={() => alert("¡Subiendo!")}>Subir imagen</Button>
     </div>
   );
 }
