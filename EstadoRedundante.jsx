@@ -68,3 +68,140 @@ function Panel({ title, children, isActive, onShow }) {
     </section>
   );
 }
+
+/* 
+import { useState } from 'react';
+
+export default function Picture() {
+  const [isActive, setIsActive] = useState(false);
+
+  let backgroundClassName = 'background';
+  let pictureClassName = 'picture';
+  if (isActive) {
+    pictureClassName += ' picture--active';
+  } else {
+    backgroundClassName += ' background--active';
+  }
+
+  return (
+    <div
+      className={backgroundClassName}
+      onClick={() => setIsActive(false)}
+    >
+      <img
+        onClick={e => {
+          e.stopPropagation();
+          setIsActive(true);
+        }}
+        className={pictureClassName}
+        alt="Casas de arcoiris en Kampung Pelangi, Indonesia"
+        src="https://i.imgur.com/5qwVYb1.jpeg"
+      />
+    </div>
+  );
+} */
+
+
+
+/* 
+import {useState} from 'react'
+
+export default function EditProfile() {
+  const [firstName, setFirstName] = useState(' Jane')
+  const [lastName, setLastName] = useState(' Jacobs')
+  const [isEditting, setIsEditting ] = useState(false)
+
+  
+  return (
+    <form onSubmit={e => {
+      e.preventDefault();
+      setIsEditting(!isEditting)
+    }}>
+      <label>
+        Nombre:{' '}
+        {isEditting ? (
+            <input
+             value={firstName}
+             onChange={e => {
+                setFirstName(e.target.value)
+             }}
+             />
+        ) : (
+          <b>{firstName}</b>
+        )}
+      </label>
+      <label>
+      </label>
+      Apellido:{' '}
+        {isEditting ? (
+            <input
+            value={lastName}
+            onChange={e => {
+                setLastName(e.target.value)
+            }}
+            />
+        ) : (
+            <b>{lastName}</b>
+        )}
+        <label/>
+      <button type="submit">
+        {isEditting ? 'Guardar' : 'Editar'} Profile
+      </button>
+      <p><i>`¡Hola, {firstName + ' ' + lastName}`</i></p>
+    </form>
+  );
+}
+ */
+
+import { useState } from 'react';
+
+const initialItems = [
+  { title: 'pretzels', id: 0 },
+  { title: 'crujiente de algas', id: 1 },
+  { title: 'barra de granola', id: 2 },
+];
+
+export default function Menu() {
+  const [items, setItems] = useState(initialItems);
+  const [selectedId, setSelectedId] = useState(0);
+
+  const selectedItem = items.find(item =>
+    item.id === selectedId
+  );
+
+  function handleItemChange(id, e) {
+    setItems(items.map(item => {
+      if (item.id === id) {
+        return {
+          ...item,
+          title: e.target.value,
+        };
+      } else {
+        return item;
+      }
+    }));
+  }
+
+  return (
+    <>
+      <h2>¿Cuál es tu merienda de viaje?</h2>
+      <ul>
+        {items.map((item, index) => (
+          <li key={item.id}>
+            <input
+              value={item.title}
+              onChange={e => {
+                handleItemChange(item.id, e)
+              }}
+            />
+            {' '}
+            <button onClick={() => {
+              setSelectedId(item.id);
+            }}>Seleccionar</button>
+          </li>
+        ))}
+      </ul>
+      <p>Seleccionaste {selectedItem.title}.</p>
+    </>
+  );
+}
